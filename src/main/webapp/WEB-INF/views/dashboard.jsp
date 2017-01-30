@@ -13,6 +13,6 @@
 <a href="<c:url value="/spitter/register" />">Register</a>
 ${company.title}
 ${company.info}
-${company.id}
+${company.comId}
 </body>
 </html>
