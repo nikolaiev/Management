@@ -13,15 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class TaskDAOImpl implements TaskDAO {
-    private SessionFactory sessionFactory;
-
-    @Autowired
-    public TaskDAOImpl(SessionFactory sessionFactory){
-        this.sessionFactory=sessionFactory;
-    }
-    private Session currentSession() {
-        return sessionFactory.getCurrentSession();
-    }
+public class TaskDAOImpl extends AbstractDAO  implements TaskDAO {
 
 }

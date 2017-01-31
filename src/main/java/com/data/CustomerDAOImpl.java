@@ -12,15 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public class CustomerDAOImpl  implements  CustomerDAO{
-    private SessionFactory sessionFactory;
+public class CustomerDAOImpl  extends AbstractDAO  implements  CustomerDAO{
 
-    @Autowired
-    public CustomerDAOImpl(SessionFactory sf){
-        this.sessionFactory=sf;
-    }
-
-    private Session currentSession() {
-        return sessionFactory.getCurrentSession();
-    }
 }

@@ -15,15 +15,6 @@ import javax.persistence.Table;
  */
 @Repository
 @Transactional
-public class SprintDAOImpl implements SprintDAO{
-    private SessionFactory sessionFactory;
-
-    @Autowired
-    public SprintDAOImpl(SessionFactory sessionFactory){
-        this.sessionFactory=sessionFactory;
-    }
-    private Session currentSession() {
-        return sessionFactory.getCurrentSession();
-    }
+public class SprintDAOImpl extends AbstractDAO  implements SprintDAO{
 
 }

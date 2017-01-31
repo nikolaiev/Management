@@ -24,10 +24,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest().authenticated()
+                    .anyRequest().authenticated()
+                    .and()
+                .formLogin().loginPage("/login")
+                .defaultSuccessUrl("/dashboard")
+                .permitAll()
                 .and()
-                .formLogin().and()
-                .httpBasic();
+                .rememberMe()
+                    .tokenValiditySeconds(2419200)
+                    .key("secretKey")
+                .and()
+                .logout()
+                .permitAll();
+                //.httpBasic();
     }
 
     @Override
@@ -37,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .jdbcAuthentication()
                     .dataSource(dataSource)
                     .usersByUsernameQuery(
-                            "select login as username,password,true " +
+                            "select login as username,password,true as enabled " +
                                     "from admin.users where login=?"
                     )
                     .authoritiesByUsernameQuery(

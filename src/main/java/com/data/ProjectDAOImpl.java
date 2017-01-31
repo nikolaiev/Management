@@ -1,5 +1,6 @@
 package com.data;
 
+import com.domain.Project;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ProjectDAOImpl  implements ProjectDAO{
-    private SessionFactory sessionFactory;
+public class ProjectDAOImpl extends AbstractDAO   implements ProjectDAO{
 
-    @Autowired
-    public ProjectDAOImpl(SessionFactory sessionFactory){
-        this.sessionFactory=sessionFactory;
-    }
-
-    private Session currentSession() {
-        return sessionFactory.getCurrentSession();
+    public Project findOne(long projectId) {
+        return currentSession().load(Project.class,projectId);
     }
 }

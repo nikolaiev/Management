@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec=
+              "http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">>
+<html>
+
+<head>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/dashboard">Dashboard</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!--This content is only shown to administrators.-->
+                <th:block sec:authorize="hasRole('ADMIN')">
+                    <li th:classappend="${page == 'employees' ? 'active' : ''}"><a href="#" th:href="@{/admin/employees}">Employees</a></li>
+                    <li th:classappend="${page == 'customers' ? 'active' : ''}"><a href="#" th:href="@{/admin/customers}">Customers</a></li>
+                    <li th:classappend="${page == 'projects' ? 'active' : ''}"><a href="#" th:href="@{/admin/projects}">Projects</a></li>
+                </th:block>
+
+                <!--This content is only shown to employees.-->
+                <th:block sec:authorize="hasRole('USER')">
+                    <li th:classappend="${page == 'new-tasks' ? 'active' : ''}"><a href="#" th:href="@{/employee/new-tasks}">New tasks</a></li>
+                    <li th:classappend="${page == 'tasks' ? 'active' : ''}"><a href="#" th:href="@{/employee/tasks}">Current tasks</a></li>
+                </th:block>
+
+                <!--This content is only shown to managers.-->
+                <th:block sec:authorize="hasRole('MANAGER')">
+                    <li th:classappend="${page == 'projects' ? 'active' : ''}"><a href="#" th:href="@{/manager/projects}">Projects</a></li>
+                    <li th:classappend="${page == 'sprints' ? 'active' : ''}"><a href="#" th:href="@{/manager/sprints}">Sprints</a></li>
+                    <li th:classappend="${page == 'tasks' ? 'active' : ''}"><a href="#" th:href="@{/manager/tasks}">Tasks</a></li>
+                </th:block>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!--li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/signin" th:href="@{/signin}">Sign in</a></li-->
+                <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="/logout" th:href="@{/logout}">Logout</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+</body>
+</html>

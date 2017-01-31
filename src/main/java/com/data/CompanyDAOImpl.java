@@ -12,19 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class CompanyDAOImpl  implements CompanyDAO{
-    private SessionFactory sessionFactory;
+public class CompanyDAOImpl  extends AbstractDAO  implements CompanyDAO{
 
-    @Autowired
-    public CompanyDAOImpl(SessionFactory sf){
-        this.sessionFactory=sf;
-    }
     public Company findOne(long id) {
         return currentSession().get(Company.class, id);
-    }
-
-    private Session currentSession() {
-        return sessionFactory.getCurrentSession();
     }
 
 }
