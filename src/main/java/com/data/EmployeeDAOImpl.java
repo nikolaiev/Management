@@ -14,10 +14,38 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class EmployeeDAOImpl extends AbstractDAO implements  EmployeeDAO {
+public class EmployeeDAOImpl extends AbstractDAO  implements  EntityDAO<Employee>{
+
+
+    @Override
+    @SuppressWarnings("unchecked")
     public List<Employee> findAll() {
         List<Employee> empls = currentSession().createQuery("from Employee").list();
         System.out.println(empls);
         return empls;
+    }
+
+    @Override
+    public Employee findById(long id) {
+        return currentSession().load(Employee.class, id);
+    }
+
+    @Override
+    public void delete(long id) {
+        Session session = currentSession();
+        Employee p = session.load(Employee.class, id);
+        if(null != p){
+            session.delete(p);
+        }
+    }
+
+    @Override
+    public void update(Employee employee) {
+        currentSession().update(employee);
+    }
+
+    @Override
+    public void add(Employee employee) {
+        currentSession().persist(employee);
     }
 }

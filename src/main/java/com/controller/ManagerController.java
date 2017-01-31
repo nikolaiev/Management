@@ -29,7 +29,7 @@ public class ManagerController {
             @RequestParam("project_id") long projectId,
             Model model
     ){
-        Project project=projectDAO.findOne(projectId);
+        Project project=projectDAO.findById(projectId);
         model.addAttribute(project);
         return "projectControl";
     }

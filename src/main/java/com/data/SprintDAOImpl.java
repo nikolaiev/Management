@@ -1,20 +1,35 @@
 package com.data;
 
 import com.domain.Sprint;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Table;
+import java.util.List;
 
 /**
  * Created by vlad on 30.01.17.
  */
 @Repository
 @Transactional
-public class SprintDAOImpl extends AbstractDAO  implements SprintDAO{
+public class SprintDAOImpl extends AbstractDAO /*implements EntityDAO<Sprint>*/{
 
+    public List<Sprint> findAll() {
+        return null;
+    }
+
+    public Sprint findById(long id) {
+        return null;
+    }
+
+    public void add(Sprint obj) {
+
+    }
+
+    public void update(Sprint obj) {
+
+    }
+
+    public void delete(long id) {
+
+    }
 }
