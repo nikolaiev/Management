@@ -6,8 +6,9 @@
 <head>
     <title >Welcome!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
-    <link href="../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <script src="../../../resources/js/employees.js"></script>
 </head>
 <body>
 <div th:replace="fragments/header :: header">&nbsp;</div>
@@ -36,12 +37,13 @@
         </thead>
         <tbody>
             <tr th:each="empl: ${employees}" >
+
                 <td th:text="${empl.empId}"></td>
                 <td th:text="${empl.fname}"></td>
                 <td th:text="${empl.lname}"></td>
                 <td th:text="${empl.rank}"></td>
-                <td><a th:href="@{employees/edit/(emp_id=${empl.empId})}" >Edit</a></td>
-                <td><a th:href="@{employees/remove(emp_id=${empl.empId})}"/>Delete</a></td>
+                <td><a th:href="@{employees/edit/(emp_id=${empl.empId})}" th:id="'edit_'+${empl.empId}">Edit</a></td>
+                <td><a th:href="@{employees/remove(emp_id=${empl.empId})}" th:id="'delete_'+${empl.empId}"/>Delete</a></td>
             </tr>
         </tbody>
     </table>

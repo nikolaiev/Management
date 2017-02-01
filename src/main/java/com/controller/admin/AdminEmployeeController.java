@@ -7,6 +7,7 @@ import com.domain.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,7 @@ public class AdminEmployeeController {
             Model view){
         Employee employee=employeeDAO.findById(emp_id);
         view.addAttribute("employee",employee);
+        view.addAttribute("test","this is fucking string");
         view.addAttribute("page","employees");
         return "/admin/employee";
     }

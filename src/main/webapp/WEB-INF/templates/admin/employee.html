@@ -6,36 +6,22 @@
 <head>
     <title >Welcome!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
-    <link href="../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <script src="../../../resources/js/employees.js"></script>
 </head>
 <body>
 <div th:replace="fragments/header :: header">&nbsp;</div>
 <div class="container">
-    <!--/* Handle the flash task */-->
-    <!--th:block th:if="${message != null}">
-        <!--/* The message code is returned from the @Controller */-->
-    <!--th:block th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</--div>
-    </th:block-->
-    <table class="table">
-        <thead>
-        <tr>
-            <th>#id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Rank</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="empl: ${employees}" >
-            <td th:text="${empl.empId}"></td>
-            <td th:text="${empl.fname}"></td>
-            <td th:text="${empl.lname}"></td>
-            <td th:text="${empl.rank}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
+    <form action="#" th:action="@{/admin/employees/edit}"  method="post">
+        <input type="hidden" id="empId" name="empId" t th:value="${employee.empId}"/>
+        <input type="text" id="fname" name="fname" th:value="${employee.fname}"  placeholder="fname"/>
+        <input type="text" id="lname" name="lname" th:value="${employee.lname}"  placeholder="lname"/>
+        <input type="number" id="rank" name="rank" min="0" max="4" th:value="${employee.rank}" placeholder="rank"/>
+
+        <input type="submit" value="save">
+    </form>
+    <div th:replace="fragments/footer :: footer"></div>
 
 </div>
 </body>

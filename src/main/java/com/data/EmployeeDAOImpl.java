@@ -27,7 +27,7 @@ public class EmployeeDAOImpl extends AbstractDAO  implements  EntityDAO<Employee
 
     @Override
     public Employee findById(long id) {
-        return currentSession().load(Employee.class, id);
+        return currentSession().get(Employee.class, id);
     }
 
     @Override
