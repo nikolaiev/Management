@@ -17,6 +17,14 @@
         <!--/* The message code is returned from the @Controller */-->
     <!--th:block th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</--div>
     </th:block-->
+    <form action="#" th:action="@{employees/add}"  method="post">
+
+        <input type="text" id="fname" name="fname"  placeholder="fname"/>
+        <input type="text" id="lname" name="lname"  placeholder="lname"/>
+        <input type="number" id="rank" name="rank" min="0" max="4" placeholder="rank"/>
+
+        <input type="submit" value="add">
+    </form>
     <table class="table">
         <thead>
         <tr>
@@ -32,6 +40,8 @@
                 <td th:text="${empl.fname}"></td>
                 <td th:text="${empl.lname}"></td>
                 <td th:text="${empl.rank}"></td>
+                <td><a th:href="@{employees/edit/(emp_id=${empl.empId})}" >Edit</a></td>
+                <td><a th:href="@{employees/remove(emp_id=${empl.empId})}"/>Delete</a></td>
             </tr>
         </tbody>
     </table>

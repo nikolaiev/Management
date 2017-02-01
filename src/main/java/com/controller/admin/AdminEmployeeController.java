@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
  * Created by vlad on 30.01.17.
  */
 @Controller
-@RequestMapping(value = "/admin",method = RequestMethod.GET)
+@RequestMapping(value = "/admin")
 public class AdminEmployeeController {
     //Repositories
     @Autowired
@@ -34,20 +35,38 @@ public class AdminEmployeeController {
         return "/admin/employees";
     }
 
-    @RequestMapping(value = "/employees/edit/{id}",method = RequestMethod.GET)
+    //update employee page
+    @RequestMapping(value = "/employees/edit",method = RequestMethod.GET)
     public String getEditEmployeeForm(
-            @PathVariable("id") Long id,
+            @RequestParam("emp_id") Long emp_id,
             Model view){
-        Employee employee=employeeDAO.findById(id);
+        Employee employee=employeeDAO.findById(emp_id);
         view.addAttribute("employee",employee);
         view.addAttribute("page","employees");
         return "/admin/employee";
     }
 
+    //Request to update Employee
     @RequestMapping(value = "/employees/edit",method = RequestMethod.POST)
     public String editEmployee(Employee employee){
         employeeDAO.update(employee);
-        return "redirect:/employees";
+        return "redirect:/admin/employees";
     }
 
+    //Removing employee
+    @RequestMapping(value = "/employees/remove",method = RequestMethod.GET)
+    public String removeEmployee(
+            @RequestParam("emp_id") Long emp_id
+        ){
+        employeeDAO.delete(emp_id);
+        return "redirect:/admin/employees";
+    }
+
+    //Adding new employee
+    @RequestMapping(value = "/employees/add",method = RequestMethod.POST)
+    public String addEmployee(Employee employee){
+                //TODO add operation success mesage
+                employeeDAO.add(employee);
+                return "redirect:/admin/employees";
+    }
 }

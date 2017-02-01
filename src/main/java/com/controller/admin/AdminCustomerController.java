@@ -16,6 +16,7 @@ import java.util.List;
  */
 @Controller
 @Transactional
+@RequestMapping("/admin")
 public class AdminCustomerController {
 
     @Autowired
